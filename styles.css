@@ -8,6 +8,7 @@ body {
 
 .category {
     margin-bottom: 60px;
+    page-break-inside: avoid; /* Prevent category splitting across pages */
 }
 
 .category-title {
@@ -18,17 +19,12 @@ body {
 }
 
 .category-description {
-    font-size: 0.8rem;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 30px;
+    text-align: justify;
     hyphens: auto;
     -webkit-hyphens: auto;
-    padding: 15px 20px;
-    line-height: 1.0;
-    margin: 15px auto 0;
-    max-width: 95%;
-    margin-top: 10px;
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #444;
-    text-align: justify;
 }
 
 .product-row {
@@ -36,6 +32,7 @@ body {
     justify-content: space-between;
     margin-bottom: 40px;
     gap: 20px;
+    page-break-inside: avoid; /* Keep product rows together */
 }
 
 .product {
@@ -44,6 +41,7 @@ body {
     padding: 15px;
     border-radius: 8px;
     background: #fff;
+    page-break-inside: avoid; /* Keep products whole on pages */
 }
 
 .product-title {
@@ -61,52 +59,38 @@ body {
 .product-images img {
     width: 32%;
     border-radius: 4px;
+    max-height: 120px; /* Limit image height */
+    object-fit: cover; /* Ensure images maintain aspect ratio */
 }
 
 .product-description {
     font-size: 14px;
     color: #444;
-    text-align: left;
+    margin-bottom: 8px;
     line-height: 1.4;
-    margin-bottom: 15px;
-}
-
-.product-description p {
-    margin: 0 0 8px 0;
-    padding: 0;
-}
-
-.product-description p:last-child {
-    margin-bottom: 0;
 }
 
 .product-links {
-    margin-top: 15px;
+    margin-top: 10px;
     display: flex;
     gap: 10px;
 }
 
 .accent-link {
     color: #B58463;
-    transition: all 0.3s ease;
-    font-weight: 400;
-    position: relative;
-    display: inline-block;
-}
-
-.accent-link:hover {
-    color: #9D6B53;
-    transform: translateY(-1px);
+    font-size: 12px;
     text-decoration: none;
 }
 
-a {
-    color: #665544;
-    text-decoration: none;
-    transition: color 0.2s ease;
-}
-
-a:hover {
-    color: #887766;
-    text-decoration: underline;
+/* Print-specific adjustments */
+@media print {
+    body {
+        padding: 20px;
+    }
+    .product-images img {
+        max-height: 100px; /* Smaller images for print */
+    }
+    .product {
+        page-break-inside: avoid;
+    }
 }
