@@ -74,16 +74,9 @@ body {
 
 .left-align-desc {
     text-align: left !important;
-}
-
-.left-align-desc p {
-    margin: 0 0 3px 0;
+    margin: 0 0 2px 0; /* Very tight spacing between metadata lines */
     line-height: 1.0;
     padding: 0;
-}
-
-.left-align-desc p:last-child {
-    margin-bottom: 0;
 }
 
 .accent-link {
