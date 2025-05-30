@@ -61,7 +61,7 @@ body {
     }
     
     @page {
-        margin-top: 2.5cm; /* Increased top margin to make room for header */
+        margin-top: 1.25cm; /* Increased top margin to make room for header */
         margin-bottom: 1.5cm;
         margin-left: 1.5cm;
         margin-right: 2.5cm;
