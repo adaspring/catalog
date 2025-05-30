@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Catalog - Booklet Layout</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+        * {
+            -webkit-print-color-adjust: exact !important;
+            color-adjust: exact !important;
+            print-color-adjust: exact !important;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #2c2c2c;
+            background: #fefefe;
+            padding: 15px;
+            line-height: 1.3;
+            margin: 0;
+            letter-spacing: -0.01em;
+        }
+
+        /* Contact Header */
+        .contact-header {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 10px;
+            color: #8b5a3c;
+            line-height: 1.2;
+            text-align: right;
+            font-weight: 400;
+        }
+
+        .contact-header .contact-label {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .contact-header .contact-info {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .contact-header .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            color: #7a6b5d;
+        }
+
+        .contact-header .contact-icon {
+            width: 10px;
+            height: 10px;
+            opacity: 0.7;
+        }
+
+        /* Print-specific contact header */
+        @media print {
+            .contact-header {
+                display: none;
+            }
+            
+            @page {
+                margin: 1.2cm;
+                
+                @top-right {
+                    content: "Contact: 📞 +33-0605738544(Luis)  🌐 www.arteakcollection.com";
+                    font-size: 10pt;
+                    color: #666;
+                    font-family: 'Inter', sans-serif;
+                    padding-top: 0.8cm;
+                }
+            }
+        }
+
+        .category {
+            margin-bottom: 20px;
+        }
+
+        .category-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: #8b5a3c;
+            border-bottom: 1px solid #e8d5c4;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #b8956f, transparent);
+        }
+
+        .category-description {
+            font-size: 13px;
+            color: #5a5a5a;
+            margin-bottom: 15px;
+            line-height: 1.4;
+            font-weight: 400;
+            max-width: 95%;
+        }
+
+        /* New grid layout for booklet format */
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .product {
+            border: 1px solid #e6ddd4;
+            padding: 12px;
+            border-radius: 6px;
+            background: #fefefe;
+            box-shadow: 0 1px 4px rgba(139, 90, 60, 0.06);
+            transition: all 0.2s ease;
+            height: fit-content;
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product:hover {
+            box-shadow: 0 2px 8px rgba(139, 90, 60, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .product-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 16px;
+            margin-bottom: 8px;
+            margin-top: 0;
+            color: #3d3d3d;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            text-align: center;
+        }
+
+        .product-images {
+            display: flex;
+            gap: 4px;
+            margin-bottom: 10px;
+            justify-content: center;
+        }
+
+        .product-images img {
+            width: 30%;
+            max-width: 80px;
+            border-radius: 4px;
+            height: auto;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease;
+        }
+
+        .product-images img:hover {
+            transform: scale(1.02);
+        }
+
+        .product-description {
+            font-size: 11px;
+            color: #4a4a4a;
+            line-height: 1.3;
+            margin: 0;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            text-align: justify;
+            flex-grow: 1;
+        }
+
+        .product-description > p:first-child {
+            font-style: italic;
+            color: #5a5a5a;
+            margin-bottom: 6px;
+            border-left: 2px solid #e8d5c4;
+            padding-left: 8px;
+            line-height: 1.2;
+        }
+
+        .left-align-desc {
+            text-align: left !important;
+            margin: 0 0 2px 0;
+            line-height: 1.1;
+            padding: 0;
+            font-size: 10px;
+            color: #666;
+            font-weight: 400;
+        }
+
+        .left-align-desc:first-of-type {
+            margin-top: 6px;
+            padding-top: 6px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        /* Print optimizations for booklet format */
+        @media print {
+            @page {
+                size: A4;
+                margin: 1.2cm;
+            }
+            
+            body {
+                padding: 0;
+                font-size: 10pt;
+                line-height: 1.2;
+                background: white;
+            }
+            
+            .category {
+                margin-bottom: 15px;
+                page-break-inside: avoid;
+            }
+            
+            .category-title {
+                font-size: 16pt;
+                page-break-after: avoid;
+                margin-bottom: 8px;
+                color: #5a5a5a !important;
+            }
+            
+            .category-title::after {
+                display: none;
+            }
+            
+            .category-description {
+                font-size: 10pt;
+                margin-bottom: 12px;
+                color: #4a4a4a !important;
+            }
+            
+            .product-grid {
+                grid-gap: 8px;
+                margin-bottom: 15px;
+            }
+            
+            .product {
+                page-break-inside: avoid;
+                padding: 8px;
+                border: 1px solid #ccc;
+                box-shadow: none;
+                background: white;
+                min-height: 250px;
+            }
+            
+            .product:hover {
+                transform: none;
+                box-shadow: none;
+            }
+            
+            .product-title {
+                font-size: 12pt;
+                margin-bottom: 6px;
+                color: #3d3d3d !important;
+            }
+            
+            .product-description {
+                font-size: 9pt;
+                line-height: 1.1;
+                color: #4a4a4a !important;
+            }
+            
+            .product-description > p:first-child {
+                border-left: none;
+                padding-left: 0;
+                color: #4a4a4a !important;
+                margin-bottom: 4px;
+            }
+            
+            .product-images {
+                margin-bottom: 6px;
+            }
+            
+            .product-images img {
+                box-shadow: none;
+                max-width: 60px;
+            }
+            
+            .product-images img:hover {
+                transform: none;
+            }
+            
+            .left-align-desc {
+                color: #666 !important;
+                font-size: 8pt;
+                margin-bottom: 1px;
+            }
+            
+            .left-align-desc:first-of-type {
+                margin-top: 4px;
+                padding-top: 4px;
+            }
+            
+            /* Force page breaks between categories if needed */
+            .category:nth-child(2) {
+                page-break-before: always;
+            }
+            
+            /* Prevent orphaned titles */
+            h1, h2 {
+                page-break-after: avoid;
+            }
+        }
+
+        /* Subtle texture overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 1px 1px, rgba(139, 90, 60, 0.02) 1px, transparent 0);
+            background-size: 20px 20px;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @media print {
+            body::before {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="contact-header">
+    <div class="contact-label">Contact:</div>
+    <div class="contact-info">
+        <div class="contact-item">
+            <span class="contact-icon">📞</span>
+            <span>+33-0605738544</span>
+        </div>
+        <div class="contact-item">
+            <span class="contact-icon">🌐</span>
+            <span>www.arteakcollection.com</span>
+        </div>
+    </div>
+</div>
+
+<div class="category">
+    <h1 class="category-title">Poids à Peser l'Or Akhan</h1>
+    <p class="category-description">Bronzes d'Afrique de l'Ouest, 19e-20e siècle. Au-delà de leur fonction de mesure de l'or, ces poids Akan incarnent un art profond, où l'utilité rencontre la maîtrise esthétique. Leurs formes complexes préservent l'héritage d'une culture où l'artisanat, le symbolisme et la vie quotidienne étaient intimement liés.</p>
+    
+    <div class="product-grid">
+        <div class="product">
+            <h2 class="product-title">Serpent Akhan</h2>
+            <div class="product-images">
+                <img src="pictures/IMG_20250419_023449.jpg" alt="">
+                <img src="pictures/IMG_20250419_024056.jpg" alt="">
+                <img src="pictures/IMG_20250419_023519.jpg" alt="">
+            </div>
+            <div class="product-description">
+                <p>Serpent en bronze enroulé en une spirale dynamique, au corps texturé et à la patine incrustée, témoignant de la maîtrise akan ; à la fois mesure et symbole de protection et de sagesse éternelle.</p>
+                <p class="left-align-desc">Matériau : Alliage de cuivre</p>
+                <p class="left-align-desc">Provenance : Galerie Lucas Ratton</p>
+                <p class="left-align-desc">Origine : Peuple akan,</p>
+                <p class="left-align-desc">Côte d'Ivoire, XIXᵉ-XXᵉ siècle</p>
+            </div>
+        </div>
+        
+        <div class="product">
+            <h2 class="product-title">Cuillère Akhan</h2>
+            <div class="product-images">
+                <img src="pictures/akhan-spoon-1.jpg" alt="">
+                <img src="pictures/akhan-spoon-3.jpg" alt="">
+                <img src="pictures/akhan-spoon-certificate.jpg" alt="">
+            </div>
+            <div class="product-description">
+                <p>Cuillère en bronze d'une exquise finesse, conçue non pour l'usage mais comme symbole de richesse et d'art ; un témoignage de la sophistication des traditions Akan en matière de poids d'or.</p>
+                <p class="left-align-desc">Matériau : Alliage de cuivre</p>
+                <p class="left-align-desc">Provenance : Galerie Lucas Ratton</p>
+                <p class="left-align-desc">Origine : Peuple akan,</p>
+                <p class="left-align-desc">Côte d'Ivoire, XIXᵉ-XXᵉ siècle</p>
+            </div>
+        </div>
+        
+        <div class="product">
+            <h2 class="product-title">Soleil Akhan</h2>
+            <div class="product-images">
+                <img src="pictures/IMG_20250419_025947.jpg" alt="">
+                <img src="pictures/sun-akhan-weight-5.jpg" alt="">
+                <img src="pictures/IMG_20250419_030625.jpg" alt="">
+            </div>
+            <div class="product-description">
+                <p>Motif solaire rayonnant en bronze, entouré de têtes serpentiformes évoquant les rayons du soleil, fusion symbolique de vitalité solaire et de forces protectrices dans la cosmologie akan.</p>
+                <p class="left-align-desc">Matériau : Alliage de cuivre</p>
+                <p class="left-align-desc">Provenance : Galerie Lucas Ratton</p>
+                <p class="left-align-desc">Origine : Peuple akan,</p>
+                <p class="left-align-desc">Côte d'Ivoire, XIXᵉ-XXᵉ siècle</p>
+            </div>
+        </div>
+        
+        <div class="product">
+            <h2 class="product-title">Jumeaux Akhan</h2>
+            <div class="product-images">
+                <img src="pictures/twins-akhan-weight-1.jpg" alt="">
+                <img src="pictures/twins-akhan-weight-3.jpg" alt="">
+                <img src="pictures/twins-akhan-weight-7.jpg" alt="">
+            </div>
+            <div class="product-description">
+                <p>Deux figures entrelacées en bronze, ornées d'une surface enrichie par une patine terreuse aux verts et bruns profonds. Leur surface porte l'empreinte texturée du temps, un témoignage d'un esprit endurant et du passage des générations.</p>
+                <p class="left-align-desc">Matériau : Alliage de cuivre</p>
+                <p class="left-align-desc">Provenance : Galerie Lucas Ratton</p>
+                <p class="left-align-desc">Origine : Peuple akan,</p>
+                <p class="left-align-desc">Côte d'Ivoire, XIXᵉ-XXᵉ siècle</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="category">
+    <h1 class="category-title">Terres cuites Nok</h1>
+    <p class="category-description">Avec leurs traits puissants et leurs formes expressives, les terres cuites Nok témoignent d'une remarquable maîtrise de l'argile dans l'art africain ancien, vers 1500 avant notre ère et 500 de notre ère. Leur symétrie raffinée et leurs détails complexes révèlent une tradition sculpturale sophistiquée. Chaque figure incarne autant un savoir-faire technique qu'une vision artistique.</p>
+    
+    <div class="product-grid">
+        <div class="product">
+            <h2 class="product-title">Grande figure masculine</h2>
+            <div class="product-images">
+                <img src="https://res.cloudinary.com/dc0pgvkii/image/upload/large-man-bust-3_z7tprs.jpg?w=800&f_auto,q_auto,dpr_auto" alt="">
+                <img src="https://res.cloudinary.com/dc0pgvkii/image/upload/large-man-bust-4_xbm3sy.jpg?w=800&f_auto,q_auto,dpr_auto" alt="">
+                <img src="https://res.cloudinary.com/dc0pgvkii/image/upload/large-man-bust-5_q9hmxy.jpg?w=800&f_auto,q_auto,dpr_auto" alt="">
+            </div>
+            <div class="product-description">
+                <p>Cette magnifique sculpture Nok en terre cuite Nok présente des traits faciaux puissants et des détails minutieux caractéristiques. Probablement fragment d'une œuvre plus grande.</p>
+                <p class="left-align-desc">Matériau : Terre cuite</p>
+                <p class="left-align-desc">Hauteur : 37 cm</p>
+                <p class="left-align-desc">Provenance : Collection privée française</p>
+                <p class="left-align-desc">Origine : Nigeria, vers le V siècle avant notre ère - V s. après notre ère</p>
+                <p class="left-align-desc">Acquis : Maison de ventes Fauve Paris</p>
+                <p class="left-align-desc">Certificat de thermoluminescence (2011)</p>
+            </div>
+        </div>
+        
+        <div class="product">
+            <h2 class="product-title">Petite figure masculine</h2>
+            <div class="product-images">
+                <img src="https://res.cloudinary.com/dc0pgvkii/image/upload/short-man-bust-1_tcjwom.jpg?w=800&f_auto,q_auto,dpr_auto" alt="">
+                <img src="https://res.cloudinary.com/dc0pgvkii/image/upload/short-man-bust-3_r0ooec.jpg?w=800&f_auto,q_auto,dpr_auto" alt="">
+                <img src="https://res.cloudinary.com/dc0pgvkii/image/upload/short-man-bust-4_ql0idu.jpg?w=800&f_auto,q_auto,dpr_auto" alt="">
+            </div>
+            <div class="product-description">
+                <p>Cette figure Nok arbore une coiffe remarquable – hybride entre casque de guerrier et chevelure stylisée. Sous cette couronne, des yeux en amande surplombent une mâchoire anguleuse et une barbe travaillée.</p>
+                <p class="left-align-desc">Matériau : Terre cuite</p>
+                <p class="left-align-desc">Hauteur : 32 cm</p>
+                <p class="left-align-desc">Provenance : Collection privée française</p>
+                <p class="left-align-desc">Origine : Nigeria, vers le V siècle avant notre ère - V s. après notre ère</p>
+                <p class="left-align-desc">Acquis : Maison de ventes Fauve Paris</p>
+                <p class="left-align-desc">Certificat de thermoluminescence (1999)</p>
+            </div>
+        </div>
+        
+        <div class="product">
+            <h2 class="product-title">Tête d'homme</h2>
+            <div class="product-images">
+                                <img src="https://res.cloudinary.com/dc0pgvkii/image/upload/man-head-3_vtbj8q.jpg?w=800&f_auto,q_auto,dpr_auto" alt="">
+                <img src="https://res.cloudinary.com/dc0pgvkii/image/upload/man-head-4_zmxn6i.jpg?w=800&f_auto,q_auto,dpr_auto" alt="">
+                <img src="https://res.cloudinary.com/dc0pgvkii/image/upload/man-head-7_zpfgqs.jpg?w=800&f_auto,q_auto,dpr_auto" alt="">
+            </div>
+            <div class="product-description">
+                <p>Cette tête Nok présente une coiffe sophistiquée, ciselée comme une couronne. Le front large et symétrique avec la barbe texturée contraste avec les yeux en amande perforés et les lèvres légèrement entrouvertes.</p>
+                <p class="left-align-desc">Matériau : Terre cuite</p>
+                <p class="left-align-desc">Hauteur : 24 cm</p>
+                <p class="left-align-desc">Provenance : Collection privée française</p>
+                <p class="left-align-desc">Origine : Nigeria, vers le V siècle avant notre ère - V s. après notre ère</p>
+                <p class="left-align-desc">Acquis : Maison de ventes Fauve Paris</p>
+                <p class="left-align-desc">Certificat de thermoluminescence (2009)</p>
+            </div>
+        </div>
+        
+        <!-- Empty product slot to maintain grid layout -->
+        <div class="product" style="visibility: hidden;">
+            <h2 class="product-title"></h2>
+            <div class="product-images">
+                <img src="" alt="">
+                <img src="" alt="">
+                <img src="" alt="">
+            </div>
+            <div class="product-description">
+                <p></p>
+                <p class="left-align-desc"></p>
+                <p class="left-align-desc"></p>
+                <p class="left-align-desc"></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
