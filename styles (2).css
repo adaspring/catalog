@@ -38,13 +38,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    gap: 12px;
+    gap: 8px;
 }
 
 .contact-header .contact-item {
     display: flex;
     align-items: center;
-    gap: 3px;
+    gap: 5px;
     color: #7a6b5d;
 }
 
@@ -63,31 +63,51 @@ body {
 }
 
 /* Print-specific contact header that appears on every page */
+/* Replace your existing print media query for contact header with this: */
+
 @media print {
     .contact-header {
-         /* Hide the screen version */
-    display: flex;
-    position: fixed;
-    top: 0;
-    right:0 ;
-    left: 0;
-    padding: 0.5cm;
-    background: white;
-    font-size: 10pt;
-    color: #666 !important;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
+        position: fixed;
+        top: 0.2cm;
+        right: 0.5cm;
+        left: auto;
+        width: auto;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        font-size: 9pt;
+        color: #666 !important;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        z-index: 1000;
     }
     
+    .contact-header .contact-label {
+        font-weight: 500;
+        margin-bottom: 0;
+    }
+    
+    .contact-header .contact-info {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+    
+    .contact-header .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #666 !important;
     }
     
     @page {
-        margin-top: 1.40cm; /* Increased top margin to make room for header */
+        margin-top: 1.2cm; /* Reduced to prevent overlap */
         margin-bottom: 1.5cm;
         margin-left: 1.5cm;
         margin-right: 2.5cm;
-        
     }
 }
 
