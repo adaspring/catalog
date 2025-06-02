@@ -303,16 +303,11 @@ a:hover {
 
     /* First @page: Custom Margins for Contact Header */
     @page {
-        margin-top: 1.2cm; /* Prevent overlap with fixed header */
-        margin-bottom: 1.5cm;
-        margin-left: 1.5cm;
-        margin-right: 2.5cm;
-    }
-
-    /* A4 Print Layout Optimization */
-    @page {
-        size: A4;
-        margin: 1.5cm;
+    size: A4;
+    margin-top: 1.2cm;    /* Prevent overlap with fixed header */
+    margin-bottom: 1.5cm;
+    margin-left: 1.5cm;
+    margin-right: 2.5cm;
     }
 
     /* Hide Texture Overlay on Print */
