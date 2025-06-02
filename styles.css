@@ -73,7 +73,7 @@ body {
     /* 2A) Page Setup */
     @page {
         size: A4;  
-        margin-top: 1.40cm;   /* reserve exactly 1.40cm for the header */
+        margin-top: 1.20cm;   /* reserve exactly 1.40cm for the header */
         margin-bottom: 1.5cm;
         margin-left: 1.5cm;
         margin-right: 2.5cm;
@@ -94,20 +94,40 @@ body {
 
     /* 2B) Fixed Contact Header on every printed page */
     .contact-header {
-        display: flex !important;
-        position: fixed !important;
-        top: 1.40cm !important;       /* exactly below @page margin-top */
-        right: 1.5cm !important;      /* inside right page-margin */
-        left: auto !important;
-        margin: 0 !important;
-        padding: 0 !important;        /* no extra padding inside */
-        background: white !important;
-        font-size: 10pt !important;
+        position: fixed;
+        top: 0.2cm;
+        right: 0.5cm;
+        left: auto;
+        width: auto;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        font-size: 9pt;
         color: #666 !important;
-        align-items: center !important;
-        justify-content: flex-end !important;
-        gap: 12px !important;
-        z-index: 1000 !important;     /* always on top of content */
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+        z-index: 1000;
+    }
+    
+    .contact-header .contact-label {
+        font-weight: 500;
+        margin-bottom: 0;
+    }
+    
+    .contact-header .contact-info {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 12px;
+    }
+    
+    .contact-header .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 3px;
+        color: #666 !important;
     }
 
     /* 2C) Category & Product Print Improvements */
