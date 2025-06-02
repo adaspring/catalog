@@ -1,0 +1,422 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
+
+* {
+    -webkit-print-color-adjust: exact !important;
+    color-adjust: exact !important;
+    print-color-adjust: exact !important;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    color: #2c2c2c;
+    background: #fefefe;
+    padding: 25px;
+    padding-top: 15px; /* Reduced top padding to compensate for header */
+    line-height: 1.4;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+/* Contact Header */
+.contact-header {
+    position: absolute;
+    top: 30px;
+    right: 40px;
+    font-size: 11px;
+    color: #8b5a3c;
+    line-height: 1.3;
+    text-align: right;
+    font-weight: 400;
+}
+
+.contact-header .contact-label {
+    font-weight: 500;
+    margin-bottom: 2px;
+}
+
+.contact-header .contact-info {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.contact-header .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    color: #7a6b5d;
+}
+
+.contact-header .contact-icon {
+    width: 12px;
+    height: 12px;
+    opacity: 0.7;
+}
+
+.product-price {
+    font-size: 14px;
+    font-weight: 500;
+    color: #8b5a3c;
+    margin: 8px 0;
+    text-align: right;
+}
+
+/* Print-specific contact header that appears on every page */
+@media print {
+    .contact-header {
+        display: none; /* Hide the screen version */
+    }
+    
+    @page {
+        margin-top: 1.40cm; /* Increased top margin to make room for header */
+        margin-bottom: 1.5cm;
+        margin-left: 1.5cm;
+        margin-right: 2.5cm;
+        
+        @top-right {
+            content: "Contact: 📞 +33-0605738544(Luis)  🌐 www.arteakcollection.com";
+            font-size: 12pt;
+            color: #666;
+            font-family: 'Inter', sans-serif;
+            padding-top: 1.0cm;
+        }
+    }
+}
+
+.category {
+    margin-bottom: 35px;
+}
+
+.category-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: #8b5a3c;
+    border-bottom: 1px solid #e8d5c4;
+    padding-bottom: 12px;
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+    position: relative;
+}
+
+.category-title::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, #b8956f, transparent);
+}
+
+.category-description {
+    font-size: 15px;
+    color: #5a5a5a;
+    margin-bottom: 22px;
+    line-height: 1.5;
+    font-weight: 400;
+    max-width: 95%;
+}
+
+.product-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    gap: 18px;
+}
+
+.product {
+    flex: 1;
+    border: 1px solid #e6ddd4;
+    padding: 16px;
+    border-radius: 8px;
+    background: #fefefe;
+    box-shadow: 0 2px 8px rgba(139, 90, 60, 0.06);
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.product:hover {
+    box-shadow: 0 4px 12px rgba(139, 90, 60, 0.1);
+    transform: translateY(-1px);
+}
+
+.product-title {
+    font-family: 'Crimson Text', serif;
+    font-size: 18px;
+    margin-bottom: 12px;
+    margin-top: 0;
+    color: #3d3d3d;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.product-images {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 12px;
+}
+
+.product-images img {
+    width: 32%;
+    border-radius: 6px;
+    height: auto;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.product-images img:hover {
+    transform: scale(1.02);
+}
+
+.product-description {
+    font-size: 13px;
+    color: #4a4a4a;
+    line-height: 1.4;
+    margin: 0;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+    text-align: justify;
+}
+
+.product-description > p:first-child {
+    font-style: italic;
+    color: #5a5a5a;
+    margin-bottom: 8px;
+    border-left: 3px solid #e8d5c4;
+    padding-left: 10px;
+    line-height: 1.3;
+}
+
+/* ── Combined “Option 1 + Option 2 + Option 4” for .left-align-desc ── */
+.left-align-desc {
+    /* ↓ Option 1: smaller, muted‐tone, indented */
+    font-size: 12px;            
+    color: #7a6b5d;             /* muted brown/gray */
+    text-align: left;           
+    margin: 5px 0 3px 12px;     
+    line-height: 1.3;           
+    font-weight: 400;           
+
+    /* ↓ Option 2: uppercase + letter spacing + tiny bullet */
+    text-transform: uppercase;    
+    letter-spacing: 0.4px;       
+    position: relative;
+    padding-left: 10px;
+}
+
+.left-align-desc::before {
+    content: "▹";                /* small decorative bullet */
+    position: absolute;
+    left: 0;
+    top: 3px;
+    font-size: 7px;
+    color: #b8956f;              /* subtle accent color */
+}
+
+/* Option 1‐divider: faint top border on the first metadata line */
+.left-align-desc:first-of-type {
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px solid #ede5df; 
+}
+
+/* Option 4: very pale background tint for each metadata line */
+.left-align-desc {
+    background-color: #f9f8f6;   /* extremely pale warm tone */
+    display: inline-block;       
+    width: calc(100% - 12px);    /* fill width minus left indent */
+    padding: 6px 8px;            
+    margin: 4px 0 4px 12px;      
+    border-radius: 4px;          
+}
+
+/* ── Accent links, plain anchors ── */
+.accent-link {
+    color: #b8956f;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    position: relative;
+    display: inline-block;
+    text-decoration: none;
+    font-size: 12px;
+    margin-right: 12px;
+}
+
+.accent-link:hover {
+    color: #8b5a3c;
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.accent-link::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: #b8956f;
+    transition: width 0.3s ease;
+}
+
+.accent-link:hover::before {
+    width: 100%;
+}
+
+a {
+    color: #7a6b5d;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: #8b5a3c;
+    text-decoration: none;
+}
+
+/* Subtle texture overlay for warmth */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(circle at 1px 1px, rgba(139, 90, 60, 0.02) 1px, transparent 0);
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ── A4 Print Layout Optimization ── */
+@media print {
+    @page {
+        size: A4;
+        margin: 1.5cm;
+    }
+    
+    body::before {
+        display: none;
+    }
+    
+    body {
+        padding: 0;
+        font-size: 12pt;
+        line-height: 1.3;
+        background: white;
+    }
+    
+    .category {
+        margin-bottom: 25px;
+        page-break-inside: avoid;
+    }
+    
+    .category-title {
+        font-size: 18pt;
+        page-break-after: avoid;
+        margin-bottom: 10px;
+        color: #5a5a5a !important;
+    }
+    
+    .category-title::after {
+        display: none;
+    }
+    
+    .category-description {
+        font-size: 11pt;
+        margin-bottom: 15px;
+        color: #4a4a4a !important;
+    }
+    
+    .product-row {
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+    }
+    
+    .product {
+        page-break-inside: avoid;
+        padding: 8px;
+        border: 1px solid #ccc;
+        box-shadow: none;
+        background: white;
+    }
+    
+    .product:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .product-title {
+        font-size: 14pt;
+        margin-bottom: 6px;
+        color: #3d3d3d !important;
+    }
+    
+    .product-description {
+        font-size: 10pt;
+        line-height: 1.2;
+        color: #4a4a4a !important;
+    }
+    
+    .product-description > p:first-child {
+        border-left: none;
+        padding-left: 0;
+        color: #4a4a4a !important;
+    }
+    
+    .product-images {
+        margin-bottom: 6px;
+    }
+    
+    .product-images img {
+        box-shadow: none;
+    }
+    
+    .product-images img:hover {
+        transform: none;
+    }
+    
+    /* ── Print override for our new .left-align-desc ── */
+    .left-align-desc {
+        background-color: transparent !important;
+        color: #4a4a4a !important;
+        text-transform: none !important;
+        letter-spacing: normal !important;
+        margin: 0 0 4px 0 !important;
+        padding: 0 !important;
+        border-top: none !important;
+    }
+    .left-align-desc::before {
+        display: none !important;
+    }
+    .left-align-desc:first-of-type {
+        margin-top: 6px !important;
+        padding-top: 0 !important;
+        border-top: none !important;
+    }
+    
+    .accent-link {
+        color: #666 !important;
+    }
+    
+    .accent-link::before {
+        display: none;
+    }
+    
+    .accent-link:hover {
+        transform: none;
+    }
+    
+    /* Ensure good page breaks */
+    .category:first-child {
+        page-break-before: avoid;
+    }
+    
+    /* Prevent orphaned titles */
+    h1, h2 {
+        page-break-after: avoid;
+    }
+}
