@@ -68,7 +68,7 @@ body {
          /* Hide the screen version */
     display: flex;
     position: fixed;
-    top: 0.8;
+    top: 0.2;
     right: 1.5;
     left: 1.5;
     padding: 0.2cm 0;
