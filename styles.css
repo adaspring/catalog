@@ -50,6 +50,7 @@ body {
     align-items: center;
     gap: 3px;
     color: #7a6b5d;
+margin-left: 12px;
 }
 
 .contact-header .contact-icon {
