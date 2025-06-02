@@ -276,6 +276,7 @@ a:hover {
         font-size: 9pt;
         color: #666 !important;
         display: flex;
+        flex-direction: column;
         align-items: center;
         justify-content: flex-end;
         gap: 8px;
