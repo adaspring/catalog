@@ -1,5 +1,9 @@
+/* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap');
 
+/*----------------------------------------
+  Global Styles
+----------------------------------------*/
 * {
     -webkit-print-color-adjust: exact !important;
     color-adjust: exact !important;
@@ -17,7 +21,27 @@ body {
     letter-spacing: -0.01em;
 }
 
-/* Contact Header */
+/* Subtle texture overlay for warmth */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: radial-gradient(
+        circle at 1px 1px,
+        rgba(139, 90, 60, 0.02) 1px,
+        transparent 0
+    );
+    background-size: 20px 20px;
+    pointer-events: none;
+    z-index: -1;
+}
+
+/*----------------------------------------
+  Contact Header (Screen)
+----------------------------------------*/
 .contact-header {
     position: absolute;
     top: 30px;
@@ -54,6 +78,9 @@ body {
     opacity: 0.7;
 }
 
+/*----------------------------------------
+  Product Price
+----------------------------------------*/
 .product-price {
     font-size: 14px;
     font-weight: 500;
@@ -62,55 +89,9 @@ body {
     text-align: right;
 }
 
-/* Print-specific contact header that appears on every page */
-/* Replace your existing print media query for contact header with this: */
-
-@media print {
-    .contact-header {
-        position: fixed;
-        top: 0.2cm;
-        right: 0.5cm;
-        left: auto;
-        width: auto;
-        padding: 0;
-        margin: 0;
-        background: transparent;
-        font-size: 9pt;
-        color: #666 !important;
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 8px;
-        z-index: 1000;
-    }
-    
-    .contact-header .contact-label {
-        font-weight: 500;
-        margin-bottom: 0;
-    }
-    
-    .contact-header .contact-info {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        gap: 8px;
-    }
-    
-    .contact-header .contact-item {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        color: #666 !important;
-    }
-    
-    @page {
-        margin-top: 1.2cm; /* Reduced to prevent overlap */
-        margin-bottom: 1.5cm;
-        margin-left: 1.5cm;
-        margin-right: 2.5cm;
-    }
-}
-
+/*----------------------------------------
+  Category & Product Layout (Screen)
+----------------------------------------*/
 .category {
     margin-bottom: 35px;
 }
@@ -216,6 +197,7 @@ body {
     line-height: 1.3;
 }
 
+/* Left-Aligned Description Variant */
 .left-align-desc {
     text-align: left !important;
     margin: 0 0 1.5px 0;
@@ -232,6 +214,7 @@ body {
     border-top: 1px solid #f0f0f0;
 }
 
+/* Accent Links */
 .accent-link {
     color: #b8956f;
     transition: all 0.3s ease;
@@ -264,6 +247,7 @@ body {
     width: 100%;
 }
 
+/* Anchor Styles */
 a {
     color: #7a6b5d;
     text-decoration: none;
@@ -275,66 +259,100 @@ a:hover {
     text-decoration: none;
 }
 
-/* Subtle texture overlay for warmth */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image: 
-        radial-gradient(circle at 1px 1px, rgba(139, 90, 60, 0.02) 1px, transparent 0);
-    background-size: 20px 20px;
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* A4 Print Layout Optimization */
+/*----------------------------------------
+  Consolidated Print Styles
+----------------------------------------*/
 @media print {
+    /* Contact Header (Print) */
+    .contact-header {
+        position: fixed;
+        top: 0.2cm;
+        right: 0.5cm;
+        left: auto;
+        width: auto;
+        padding: 0;
+        margin: 0;
+        background: transparent;
+        font-size: 9pt;
+        color: #666 !important;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        z-index: 1000;
+    }
+
+    .contact-header .contact-label {
+        font-weight: 500;
+        margin-bottom: 0;
+    }
+
+    .contact-header .contact-info {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+    }
+
+    .contact-header .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: #666 !important;
+    }
+
+    /* First @page: Custom Margins for Contact Header */
+    
     @page {
         size: A4;
-        margin: 1.5cm;
+        margin-top: 1.2cm;    /* Prevent overlap with fixed header */
+        margin-bottom: 1.5cm;
+        margin-left: 1.5cm;
+        margin-right: 2.5cm;
     }
-    
+
+    /* Hide Texture Overlay on Print */
     body::before {
         display: none;
     }
-    
+
+    /* Body Adjustments */
     body {
         padding: 0;
         font-size: 12pt;
         line-height: 1.3;
         background: white;
     }
-    
+
+    /* Category Overrides */
     .category {
         margin-bottom: 25px;
         page-break-inside: avoid;
     }
-    
+
     .category-title {
         font-size: 18pt;
         page-break-after: avoid;
         margin-bottom: 10px;
         color: #5a5a5a !important;
     }
-    
+
     .category-title::after {
         display: none;
     }
-    
+
     .category-description {
         font-size: 11pt;
         margin-bottom: 15px;
         color: #4a4a4a !important;
     }
-    
+
+    /* Product Row & Product Overrides */
     .product-row {
         margin-bottom: 20px;
         page-break-inside: avoid;
     }
-    
+
     .product {
         page-break-inside: avoid;
         padding: 8px;
@@ -342,65 +360,67 @@ body::before {
         box-shadow: none;
         background: white;
     }
-    
+
     .product:hover {
         transform: none;
         box-shadow: none;
     }
-    
+
     .product-title {
         font-size: 14pt;
         margin-bottom: 6px;
         color: #3d3d3d !important;
     }
-    
+
     .product-description {
         font-size: 10pt;
         line-height: 1.2;
         color: #4a4a4a !important;
     }
-    
+
     .product-description > p:first-child {
         border-left: none;
         padding-left: 0;
         color: #4a4a4a !important;
     }
-    
+
     .product-images {
         margin-bottom: 6px;
     }
-    
+
     .product-images img {
         box-shadow: none;
     }
-    
+
     .product-images img:hover {
         transform: none;
     }
-    
+
+    /* Left-Aligned Description (Print Variant) */
     .left-align-desc {
         color: #666 !important;
     }
-    
+
+    /* Accent Link (Print Variant) */
     .accent-link {
         color: #666 !important;
     }
-    
+
     .accent-link::before {
         display: none;
     }
-    
+
     .accent-link:hover {
         transform: none;
     }
-    
-    /* Ensure good page breaks */
+
+    /* Ensure Good Page Breaks */
     .category:first-child {
         page-break-before: avoid;
     }
-    
-    /* Prevent orphaned titles */
-    h1, h2 {
+
+    h1,
+    h2 {
         page-break-after: avoid;
     }
 }
