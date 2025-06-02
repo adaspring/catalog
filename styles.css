@@ -65,7 +65,22 @@ body {
 /* Print-specific contact header that appears on every page */
 @media print {
     .contact-header {
-        display: none; /* Hide the screen version */
+         /* Hide the screen version */
+    display: flex;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    padding: 0.5cm;
+    background: white;
+    padding: 0.5cm;
+    font-size: 10pt;
+    color: #666 !important;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+    }
+    
     }
     
     @page {
