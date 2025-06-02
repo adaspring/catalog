@@ -337,6 +337,11 @@ a:hover {
         color: #5a5a5a !important;
     }
 
+  .category:not(:first-child) .category-title {
+    margin-top: 2.0cm !important;
+  }
+
+
     .category-title::after {
         display: none;
     }
