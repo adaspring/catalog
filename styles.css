@@ -74,10 +74,10 @@ margin-left: 12px;
     /* 2A) Page Setup */
     @page {
         size: A4;  
-        margin-top: 1.20cm;   /* reserve exactly 1.40cm for the header */
+        margin-top: 1.40cm;   /* reserve exactly 1.40cm for the header */
         margin-bottom: 1.5cm;
         margin-left: 1.5cm;
-        margin-right: 2.5cm;
+        margin-right: 1.5cm;
     }
 
     /* Hide the subtle‐texture background on print */
