@@ -108,7 +108,7 @@ margin-left: 12px;
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        gap: 12px;
+        gap: 8px;
         z-index: 1000;
     }
     
@@ -121,13 +121,13 @@ margin-left: 12px;
         display: flex;
         align-items: center;
         justify-content: flex-end;
-        gap: 12px;
+        gap: 8px;
     }
     
     .contact-header .contact-item {
         display: flex;
         align-items: center;
-        gap: 3px;
+        gap: 5px;
         color: #666 !important;
     }
 
