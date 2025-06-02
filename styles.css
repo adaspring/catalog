@@ -54,6 +54,14 @@ body {
     opacity: 0.7;
 }
 
+.product-price {
+    font-size: 14px;
+    font-weight: 500;
+    color: #8b5a3c;
+    margin: 8px 0;
+    text-align: left;
+}
+
 /* Print-specific contact header that appears on every page */
 @media print {
     .contact-header {
