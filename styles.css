@@ -17,16 +17,20 @@ body {
     letter-spacing: -0.01em;
 }
 
-/* Contact Header */
-.contact-header {
-    position: absolute;
-    top: 30px;
-    right: 40px;
-    font-size: 11px;
-    color: #8b5a3c;
-    line-height: 1.3;
-    text-align: right;
-    font-weight: 400;
+/* ───────────────────────────────────────────────────────────────── */
+/* 1) Screen-only “absolute” Contact Header                          */
+/* ───────────────────────────────────────────────────────────────── */
+@media screen {
+  .contact-header {
+      position: absolute;
+      top: 30px;
+      right: 40px;
+      font-size: 11px;
+      color: #8b5a3c;
+      line-height: 1.3;
+      text-align: right;
+      font-weight: 400;
+  }
 }
 
 .contact-header .contact-label {
@@ -62,34 +66,145 @@ body {
     text-align: right;
 }
 
-/* Print-specific contact header that appears on every page */
+/* ───────────────────────────────────────────────────────────────── */
+/* 2) Print-only Styles (single @media print + single @page)         */
+/* ───────────────────────────────────────────────────────────────── */
 @media print {
-    .contact-header {
-         /* Hide the screen version */
-    display: flex;
-    position: fixed;
-    top: 0;
-    right:0 ;
-    left: 0;
-    padding: 0.5cm;
-    background: white;
-    font-size: 10pt;
-    color: #666 !important;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
-    }
-    
-    }
-    
+    /* 2A) Page Setup */
     @page {
-        margin-top: 1.40cm; /* Increased top margin to make room for header */
+        size: A4;  
+        margin-top: 1.40cm;   /* reserve exactly 1.40cm for the header */
         margin-bottom: 1.5cm;
         margin-left: 1.5cm;
         margin-right: 2.5cm;
-        
     }
 
+    /* Hide the subtle‐texture background on print */
+    body::before {
+        display: none;
+    }
+
+    /* Reset body for print */
+    body {
+        padding: 0;
+        font-size: 12pt;
+        line-height: 1.3;
+        background: white;
+    }
+
+    /* 2B) Fixed Contact Header on every printed page */
+    .contact-header {
+        display: flex !important;
+        position: fixed !important;
+        top: 1.40cm !important;       /* exactly below @page margin-top */
+        right: 1.5cm !important;      /* inside right page-margin */
+        left: auto !important;
+        margin: 0 !important;
+        padding: 0 !important;        /* no extra padding inside */
+        background: white !important;
+        font-size: 10pt !important;
+        color: #666 !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        gap: 12px !important;
+        z-index: 1000 !important;     /* always on top of content */
+    }
+
+    /* 2C) Category & Product Print Improvements */
+    .category {
+        margin-bottom: 25px;
+        page-break-inside: avoid;
+    }
+
+    .category-title {
+        font-family: 'Crimson Text', serif;
+        font-size: 18pt;
+        page-break-after: avoid;
+        margin-bottom: 10px;
+        color: #5a5a5a !important;
+    }
+    .category-title::after {
+        display: none;
+    }
+
+    .category-description {
+        font-size: 11pt;
+        margin-bottom: 15px;
+        color: #4a4a4a !important;
+    }
+
+    .product-row {
+        margin-bottom: 20px;
+        page-break-inside: avoid;
+    }
+
+    .product {
+        page-break-inside: avoid;
+        padding: 8px;
+        border: 1px solid #ccc;
+        box-shadow: none;
+        background: white;
+    }
+    .product:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .product-title {
+        font-size: 14pt;
+        margin-bottom: 6px;
+        color: #3d3d3d !important;
+    }
+
+    .product-description {
+        font-size: 10pt;
+        line-height: 1.2;
+        color: #4a4a4a !important;
+    }
+    .product-description > p:first-child {
+        border-left: none;
+        padding-left: 0;
+        color: #4a4a4a !important;
+    }
+
+    .product-images {
+        margin-bottom: 6px;
+    }
+    .product-images img {
+        box-shadow: none;
+    }
+    .product-images img:hover {
+        transform: none;
+    }
+
+    .left-align-desc {
+        color: #666 !important;
+    }
+
+    .accent-link {
+        color: #666 !important;
+    }
+    .accent-link::before {
+        display: none;
+    }
+    .accent-link:hover {
+        transform: none;
+    }
+
+    /* Ensure good page breaks */
+    .category:first-child {
+        page-break-before: avoid;
+    }
+
+    /* Prevent orphaned titles */
+    h1, h2 {
+        page-break-after: avoid;
+    }
+}
+
+/* ───────────────────────────────────────────────────────────────── */
+/* 3) Category & Product Styles (both screen & print)               */
+/* ───────────────────────────────────────────────────────────────── */
 .category {
     margin-bottom: 35px;
 }
@@ -105,7 +220,6 @@ body {
     letter-spacing: 0.5px;
     position: relative;
 }
-
 .category-title::after {
     content: '';
     position: absolute;
@@ -142,7 +256,6 @@ body {
     transition: all 0.2s ease;
     position: relative;
 }
-
 .product:hover {
     box-shadow: 0 4px 12px rgba(139, 90, 60, 0.1);
     transform: translateY(-1px);
@@ -163,7 +276,6 @@ body {
     gap: 5px;
     margin-bottom: 12px;
 }
-
 .product-images img {
     width: 32%;
     border-radius: 6px;
@@ -171,7 +283,6 @@ body {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
 }
-
 .product-images img:hover {
     transform: scale(1.02);
 }
@@ -185,7 +296,6 @@ body {
     -webkit-hyphens: auto;
     text-align: justify;
 }
-
 .product-description > p:first-child {
     font-style: italic;
     color: #5a5a5a;
@@ -204,7 +314,6 @@ body {
     color: #666;
     font-weight: 400;
 }
-
 .left-align-desc:first-of-type {
     margin-top: 8px;
     padding-top: 8px;
@@ -221,13 +330,11 @@ body {
     font-size: 12px;
     margin-right: 12px;
 }
-
 .accent-link:hover {
     color: #8b5a3c;
     transform: translateY(-1px);
     text-decoration: none;
 }
-
 .accent-link::before {
     content: '';
     position: absolute;
@@ -238,7 +345,6 @@ body {
     background: #b8956f;
     transition: width 0.3s ease;
 }
-
 .accent-link:hover::before {
     width: 100%;
 }
@@ -248,7 +354,6 @@ a {
     text-decoration: none;
     transition: color 0.2s ease;
 }
-
 a:hover {
     color: #8b5a3c;
     text-decoration: none;
@@ -262,124 +367,9 @@ body::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: 
+    background-image:
         radial-gradient(circle at 1px 1px, rgba(139, 90, 60, 0.02) 1px, transparent 0);
     background-size: 20px 20px;
     pointer-events: none;
     z-index: -1;
-}
-
-/* A4 Print Layout Optimization */
-@media print {
-    @page {
-        size: A4;
-        margin: 1.5cm;
-    }
-    
-    body::before {
-        display: none;
-    }
-    
-    body {
-        padding: 0;
-        font-size: 12pt;
-        line-height: 1.3;
-        background: white;
-    }
-    
-    .category {
-        margin-bottom: 25px;
-        page-break-inside: avoid;
-    }
-    
-    .category-title {
-        font-size: 18pt;
-        page-break-after: avoid;
-        margin-bottom: 10px;
-        color: #5a5a5a !important;
-    }
-    
-    .category-title::after {
-        display: none;
-    }
-    
-    .category-description {
-        font-size: 11pt;
-        margin-bottom: 15px;
-        color: #4a4a4a !important;
-    }
-    
-    .product-row {
-        margin-bottom: 20px;
-        page-break-inside: avoid;
-    }
-    
-    .product {
-        page-break-inside: avoid;
-        padding: 8px;
-        border: 1px solid #ccc;
-        box-shadow: none;
-        background: white;
-    }
-    
-    .product:hover {
-        transform: none;
-        box-shadow: none;
-    }
-    
-    .product-title {
-        font-size: 14pt;
-        margin-bottom: 6px;
-        color: #3d3d3d !important;
-    }
-    
-    .product-description {
-        font-size: 10pt;
-        line-height: 1.2;
-        color: #4a4a4a !important;
-    }
-    
-    .product-description > p:first-child {
-        border-left: none;
-        padding-left: 0;
-        color: #4a4a4a !important;
-    }
-    
-    .product-images {
-        margin-bottom: 6px;
-    }
-    
-    .product-images img {
-        box-shadow: none;
-    }
-    
-    .product-images img:hover {
-        transform: none;
-    }
-    
-    .left-align-desc {
-        color: #666 !important;
-    }
-    
-    .accent-link {
-        color: #666 !important;
-    }
-    
-    .accent-link::before {
-        display: none;
-    }
-    
-    .accent-link:hover {
-        transform: none;
-    }
-    
-    /* Ensure good page breaks */
-    .category:first-child {
-        page-break-before: avoid;
-    }
-    
-    /* Prevent orphaned titles */
-    h1, h2 {
-        page-break-after: avoid;
-    }
 }
